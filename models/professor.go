@@ -1,4 +1,4 @@
-package entities
+package models
 
 type Professor struct {
 	ID           int    `json:"id"`

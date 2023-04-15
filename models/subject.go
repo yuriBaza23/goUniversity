@@ -1,4 +1,4 @@
-package entities
+package models
 
 type Subject struct {
 	ID           int    `json:"id"`
