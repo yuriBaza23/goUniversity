@@ -36,14 +36,14 @@ O arquivo ***config.toml*** deve ser modificado com base nas configurações do 
 Esse arquivo deve estar na pasta raiz do projeto e conter obrigatóriamente as seguintes informações:
 ```toml
 [api]
-port
+port=3333
 
 [db]
-host
-port
-user
-password
-database
+host=""
+port=""
+user=""
+password=""
+database=""
 ```
 >EM HIPÓTESE ALGUMA SUBA SEU ARQUIVO DE CONFIGURAÇÃO PARA O GITHUB
   
