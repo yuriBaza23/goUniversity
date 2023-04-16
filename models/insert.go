@@ -3,7 +3,11 @@ package models
 import "gopi/db"
 
 func InsertSchool(school School) (id int, err error) {
-	school.VerifyType()
+	err = school.VerifyType()
+	if err != nil {
+		return
+	}
+
 	conn, err := db.OpenConnection()
 	if err != nil {
 		return
