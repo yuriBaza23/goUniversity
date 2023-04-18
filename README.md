@@ -64,7 +64,7 @@ _Caso tenha criado uma variável, especifique isso em um Pull Request_
 ## Rodando o backend
 Execute o backend com
 ```shell
-go run main.go
+go run ./cmd/gopi/main.go
 ```
 
 ## Criando seu banco de dados

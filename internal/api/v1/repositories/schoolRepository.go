@@ -1,8 +1,11 @@
 package repositories
 
-import "gopi/models"
+import (
+	"gopi/internal/api/v1/models"
+	"time"
+)
 
-func DeleteSchool(id int) (int64, error) {
+func DeleteSchool(id int64) (int64, error) {
 	conn, err := OpenConnection()
 	if err != nil {
 		return 0, err
@@ -18,7 +21,7 @@ func DeleteSchool(id int) (int64, error) {
 	return row.RowsAffected()
 }
 
-func InsertSchool(school models.School) (id int, err error) {
+func InsertSchool(school models.School) (id int64, err error) {
 	err = school.VerifyType()
 	if err != nil {
 		return
@@ -30,14 +33,14 @@ func InsertSchool(school models.School) (id int, err error) {
 	}
 	defer conn.Close()
 
-	stmt := `INSERT INTO schools (name, type) VALUES ($1, $2) RETURNING id`
+	stmt := `INSERT INTO schools (name, type, logo) VALUES ($1, $2, $3) RETURNING id`
 
 	err = conn.QueryRow(stmt, school.Name, school.Type).Scan(&id)
 
 	return
 }
 
-func GetSchool(id int) (s models.School, err error) {
+func GetSchool(id int64) (s models.School, err error) {
 	conn, err := OpenConnection()
 	if conn != nil {
 		return
@@ -80,15 +83,15 @@ func GetAllSchools() (s []models.School, err error) {
 	return
 }
 
-func UpdateSchool(id int, s models.School) (int64, error) {
+func UpdateSchool(id int64, s models.School) (int64, error) {
 	conn, err := OpenConnection()
 	if err != nil {
 		return 0, err
 	}
 	defer conn.Close()
 
-	stmt := `UPDATE schools SET name=$1, type=$2 WHERE id=$3`
-	row, err := conn.Exec(stmt, s.Name, s.Type, id)
+	stmt := `UPDATE schools SET name=$1, type=$2, logo=$3, updatedAt=$4 WHERE id=$5`
+	row, err := conn.Exec(stmt, s.Name, s.Type, s.Logo, time.Now(), id)
 	if err != nil {
 		return 0, err
 	}

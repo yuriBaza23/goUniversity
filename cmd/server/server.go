@@ -2,13 +2,13 @@ package server
 
 import (
 	"fmt"
-	"gopi/server/handlers"
+	"gopi/internal/api/v1/handlers"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 )
 
-func Init(port string) {
+func HttpInit(port string) {
 	r := chi.NewRouter()
 
 	r.Post("/school", handlers.CreateSchool)

@@ -3,8 +3,8 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"gopi/models"
-	"gopi/repositories"
+	"gopi/internal/api/v1/models"
+	"gopi/internal/api/v1/repositories"
 	"net/http"
 )
 

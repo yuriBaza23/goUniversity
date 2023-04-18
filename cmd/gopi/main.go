@@ -1,8 +1,8 @@
 package main
 
 import (
+	"gopi/cmd/server"
 	"gopi/config"
-	"gopi/server"
 )
 
 func main() {
@@ -11,5 +11,5 @@ func main() {
 		panic(err)
 	}
 
-	server.Init(config.GetAPIConfig())
+	server.HttpInit(config.GetAPIConfig())
 }

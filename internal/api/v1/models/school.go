@@ -5,9 +5,10 @@ import "errors"
 var SchoolProps []string = []string{"public", "private"}
 
 type School struct {
-	ID   int    `json:"id"`
+	ID   int64  `json:"id"`
 	Name string `json:"name"`
 	Type string `json:"type"`
+	Logo string `json:"logo"`
 }
 
 func (s *School) VerifyType() error {
