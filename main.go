@@ -1,12 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"gopi/config"
-	"gopi/handlers"
-	"net/http"
-
-	"github.com/go-chi/chi/v5"
+	"gopi/server"
 )
 
 func main() {
@@ -15,8 +11,5 @@ func main() {
 		panic(err)
 	}
 
-	r := chi.NewRouter()
-	r.Post("/school", handlers.Create)
-
-	http.ListenAndServe(fmt.Sprintf(":%s", config.GetAPIConfig()), r)
+	server.Init(config.GetAPIConfig())
 }

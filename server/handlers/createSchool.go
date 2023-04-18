@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"gopi/models"
+	"gopi/repositories"
 	"net/http"
 )
 
-func Create(w http.ResponseWriter, r *http.Request) {
+func CreateSchool(w http.ResponseWriter, r *http.Request) {
 	var school models.School
 
 	err := json.NewDecoder(r.Body).Decode(&school)
@@ -16,7 +17,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	id, err := models.InsertSchool(school)
+	id, err := repositories.InsertSchool(school)
 
 	var resp map[string]any
 	if err != nil {
