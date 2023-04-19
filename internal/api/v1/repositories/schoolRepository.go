@@ -35,23 +35,21 @@ func InsertSchool(school models.School) (id int64, err error) {
 
 	stmt := `INSERT INTO schools (name, type, logo) VALUES ($1, $2, $3) RETURNING id`
 
-	err = conn.QueryRow(stmt, school.Name, school.Type).Scan(&id)
+	err = conn.QueryRow(stmt, school.Name, school.Type, school.Logo).Scan(&id)
 
 	return
 }
 
 func GetSchool(id int64) (s models.School, err error) {
 	conn, err := OpenConnection()
-	if conn != nil {
+	if err != nil {
 		return
 	}
 	defer conn.Close()
 
-	stmt := `SELECT * FROM schools WHERE id=$1`
+	stmt := `SELECT id, name, type, logo FROM schools WHERE id=$1`
 
-	row := conn.QueryRow(stmt, id)
-
-	err = row.Scan(&s.ID, &s.Name, &s.Type)
+	err = conn.QueryRow(stmt, id).Scan(&s.ID, &s.Name, &s.Type, &s.Logo)
 
 	return
 }
@@ -63,7 +61,7 @@ func GetAllSchools() (s []models.School, err error) {
 	}
 	defer conn.Close()
 
-	stmt := `SELECT * FROM schools`
+	stmt := `SELECT id, name, type, logo FROM schools`
 	rows, err := conn.Query(stmt)
 	if err != nil {
 		return
@@ -72,7 +70,7 @@ func GetAllSchools() (s []models.School, err error) {
 	for rows.Next() {
 		var school models.School
 
-		err = rows.Scan(&school.ID, &school.Name, &school.Type)
+		err = rows.Scan(&school.ID, &school.Name, &school.Type, &school.Logo)
 		if err != nil {
 			continue
 		}
