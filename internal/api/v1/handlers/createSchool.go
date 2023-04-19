@@ -23,7 +23,7 @@ func CreateSchool(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		resp = map[string]any{
 			"error":   true,
-			"message": "Error inserting school",
+			"message": err.Error(),
 		}
 	} else {
 		resp = map[string]any{
